@@ -27,11 +27,12 @@ function App() {
 
   const guardarGasto = (gasto) => {
     gasto.id = generarId();
+    gasto.fecha = Date.now();
     setGastos([...gastos, gasto]);
   };
 
   return (
-    <div>
+    <div className={modal && "fijar"}>
       <Toaster position="top-right" reverseOrder={false} />
       <Header
         presupuesto={presupuesto}
@@ -43,9 +44,9 @@ function App() {
       {/* Si el presupuesto es valido mostramos el boton */}
       {isValid && (
         <>
-        <main>
-          <ListadoGastos />
-        </main>
+          <main>
+            <ListadoGastos gastos={gastos} />
+          </main>
           <div className="nuevo-gasto">
             <img
               src={IconoNuevoGasto}
