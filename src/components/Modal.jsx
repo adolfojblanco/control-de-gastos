@@ -31,6 +31,7 @@ export const Modal = ({
       return;
     }
 
+    gasto.cantidad = Number(gasto.cantidad)
     guardarGasto(gasto);
     ocultarModal();
   };
@@ -73,11 +74,11 @@ export const Modal = ({
         <div className="campo">
           <label htmlFor="cantidad">Cantidad</label>
           <input
-            type="text"
+            type="number"
             name="cantidad"
             id="cantidad"
             placeholder="Añade la cantidad"
-            value={Number(cantidad)}
+            value={cantidad}
             onChange={handleInputs}
           />
         </div>

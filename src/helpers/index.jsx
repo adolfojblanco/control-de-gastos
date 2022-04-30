@@ -20,3 +20,15 @@ export const formatearFecha = (fecha) => {
   };
   return fechaNueva.toLocaleDateString("es-ES", opciones);
 };
+
+// Formatear como moneda (EURO)
+// No muta la cantidad, solo lo formatea
+
+export const formatearCantidad = (cantidad) => {
+  return cantidad.toLocaleString("es-ES", {
+    style: "currency",
+    currency: "EUR",
+  });
+};
+
+// Salida: 100,00 €

@@ -32,13 +32,14 @@ function App() {
   };
 
   return (
-    <div className={modal && "fijar"}>
+    <div className={modal ? "fijar" : ''}>
       <Toaster position="top-right" reverseOrder={false} />
       <Header
         presupuesto={presupuesto}
         setPresupuesto={setPresupuesto}
         isValid={isValid}
         setIsValid={setIsValid}
+        gastos={gastos}
       />
 
       {/* Si el presupuesto es valido mostramos el boton */}
