@@ -115,6 +115,7 @@ function App() {
     <div className={modal ? "fijar" : ""}>
       <Toaster position="top-right" reverseOrder={false} />
       <Header
+        setGastos={setGastos}
         presupuesto={presupuesto}
         setPresupuesto={setPresupuesto}
         isValid={isValid}
