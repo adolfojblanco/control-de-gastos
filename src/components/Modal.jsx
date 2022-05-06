@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import CerrarModal from "../img/cerrar.svg";
 
@@ -7,12 +7,22 @@ export const Modal = ({
   animarModal,
   setAnimarModal,
   guardarGasto,
+  gastoEditar,
+  setGastoEditar,
 }) => {
   const [gasto, setGasto] = useState({
     nombre: "",
     cantidad: "",
     categoria: "",
   });
+
+  const [id, setId] = useState("");
+
+  useEffect(() => {
+    if (Object.keys(gastoEditar).length) {
+      setGasto(gastoEditar);
+    }
+  }, []);
 
   const { nombre, cantidad, categoria } = gasto;
 
@@ -31,13 +41,14 @@ export const Modal = ({
       return;
     }
 
-    gasto.cantidad = Number(gasto.cantidad)
-    guardarGasto(gasto);
+    gasto.cantidad = Number(gasto.cantidad);
+    guardarGasto(gasto, id);
     ocultarModal();
   };
 
   const ocultarModal = () => {
     setAnimarModal(false);
+    setGastoEditar({});
     setTimeout(() => {
       setModal(false);
     }, 500);
@@ -58,7 +69,7 @@ export const Modal = ({
         className={`formulario ${animarModal ? "animar" : "cerrar"}`}
         onSubmit={hanldeForm}
       >
-        <legend>Nuevo Gasto</legend>
+        <legend>{gastoEditar.nombre ? "Editar Gasto" : "Nuevo Gasto"}</legend>
         <div className="campo">
           <label htmlFor="nombre">Nombre Gasto</label>
           <input
@@ -101,7 +112,10 @@ export const Modal = ({
             <option value="suscripciones">Suscripciones</option>
           </select>
         </div>
-        <input type="submit" value="Añadir Gasto" />
+        <input
+          type="submit"
+          value={gastoEditar.nombre ? "Editar Gasto" : "Añadir Gasto"}
+        />
       </form>
     </div>
   );
